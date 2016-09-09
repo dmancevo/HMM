@@ -19,4 +19,4 @@ end;
 
 %*** Insert your own code here and remove the following error message 
 
-error('Not yet implemented');
+R = randsample(length(pD.ProbMass), nData, true, pD.ProbMass);

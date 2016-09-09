@@ -24,7 +24,19 @@ function S=rand(mc,T)
 S=zeros(1,T);%space for resulting row vector
 nS=mc.nStates;
 
-error('Method not yet implemented');
 %continue code from here, and erase the error message........
 
+S(1,1) = rand(DiscreteD(mc.InitialProb),1);
 
+transProb = cell(1, nS);
+for i=1:nS
+    transProb{i} = DiscreteD(mc.TransitionProb(i,:));
+end;
+
+for i=2:T
+    S(1,i) = rand(transProb{S(1,i - 1)},1);
+    if S(1,i) > nS
+        S = S(1,1:i - 1);
+        break
+    end;
+end;
