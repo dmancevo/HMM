@@ -23,7 +23,7 @@
 %Ref:   Arne Leijon (20xx): Pattern Recognition.
 %
 %----------------------------------------------------
-%Code Authors:
+%Code Authors: Olga Mikheeva, Diego A. Mancevo
 %----------------------------------------------------
 
 function logP=logprob(hmm,x)
@@ -36,5 +36,8 @@ for i=1:numel(hmm)%for all HMM objects
     %
     %logP(i)= result for hmm(i)
     %continue coding from here, and delete the error message.
-    error('Not yet implemented');
+    
+    [pX, logS] = prob(hmm(i).OutputDistr,x);
+    [~, c]=forward(hmm(i).StateGen,pX);
+    logP(i) = sum(log(c)) + sum(logS);
 end;
