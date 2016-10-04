@@ -11,6 +11,9 @@ c_scaled_correct = [1.0000 0.1625 0.8266 0.0581];
 
 c_unscaled_correct = [0.3910 0.0318 0.1417 0.0581];
 
+betaHat_correct = [1.0003    1.0393    0;
+                   8.4182    9.3536    2.0822];
+
 %create HMM
 mc = MarkovChain([1 0], [0.9 0.1 0; 0 0.9 0.1]);
 g1=GaussD('Mean',0,'StDev',1);
@@ -41,3 +44,4 @@ c_unscaled = c_scaled .* [exp(logS),ones(isFinite)]
 
 logP = logprob([h],x)
 
+betaHat = backward(mc, p_scaled, c_scaled)
